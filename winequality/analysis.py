@@ -32,10 +32,14 @@ def run(dataset):
     print(dataset.isnull().sum())
 
     print(colored('\n------------------------------------------\n', 'green'))
-
     print(colored('Describe the dataset:\n', 'green'))
     print(dataset.describe())
+    print(colored('\n------------------------------------------\n', 'green'))
 
+
+    print(colored('\n------------------------------------------\n', 'green'))
+    print(colored('Show the quantity of rows for particular class:\n', 'green'))
+    print(dataset.groupby(['quality']).count())
     print(colored('\n------------------------------------------\n', 'green'))
 
     plot_in_single_frame('Dataset', dataset, plot_var_distribution)
