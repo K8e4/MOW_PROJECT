@@ -4,8 +4,11 @@
 3. Activate the environment ~conda activate winequality~
 
 * Run
-** Without analysis
+** Regular run
 ~python -m winequality.core~
 
 ** With analysis
- ~RUN_ANALYSIS=1 python -m winequality.core~
+~ANALYSIS=1 python -m winequality.core~
+
+** With debug
+~DEBUG=1 python -m winequality.core~
