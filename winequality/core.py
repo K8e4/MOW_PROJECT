@@ -28,6 +28,10 @@ if os.environ.get('ANALYSIS') == '1':
 # START: Classification Algorithm
 #--------------------------------------------------------------------------------------------------
 
+## Standarize the data
+df = t.transform(df, gd_col)
+
+
 
 ## Join the class 3/4 to one class and 8/9 to one class
 df = t.merge_classes_by_vals(t.merge_classes_by_vals(df, gd_col, 6, 7, 6), gd_col, 3, 4, 3)
@@ -45,6 +49,7 @@ print('\nLABELS OF COLUMN `QUALITY`: ' + str(df.quality.unique()))
 df1 = t.outliers_to_std(df.copy(), df.columns[:-1])
 
 
+
 ## Select the features which are useful
 print('\nBefore selection: ' + str(df.shape) + '\n')
 df = t.select_with_chi(df, gd_col)
@@ -56,11 +61,18 @@ print('\nAfter selection: ' + str(df.shape))
 
 
 
+## Extraction of features with PCA
+if os.environ.get('WITH_PCA') == '1':
+    df = t.extract_with_pca(df, gd_col)
+    df1 = t.extract_with_pca(df, gd_col)
+
+
+
 ## split dataset into [90% of df = train, 10% of df = test]
 ## stratiffy according to ground truth classes
 ## example [train[1,2,3], test[2,3,4,5]]
-df_train, df_test = t.train_test_pair(df, gd_col)
-df1_train, df1_test = t.train_test_pair(df, gd_col)
+df_generator = t.train_test_generator(df, gd_col)
+d1_generator = t.train_test_generator(df, gd_col)
 
 
 #--------------------------------------------------------------------------------------------------

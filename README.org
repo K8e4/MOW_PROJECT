@@ -12,3 +12,6 @@
 
 ** With debug
 ~DEBUG=1 python -m winequality.core~
+
+* Other options
+- ~WITH_PCA~ - Enables PCA extraction
